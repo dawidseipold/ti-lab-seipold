@@ -16,6 +16,43 @@ body {
   background: #fafafa;
 }
 
+/* ---------- Nagłówek i nawigacja ---------- */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #4426FF;
+}
+
+.menu {
+  display: flex;
+  gap: 16px;
+}
+
+.menu a {
+  color: #1d1d1f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.menu a:hover,
+.menu a:focus {
+  color: #4426FF;
+}
+
 main,
 footer {
   max-width: 1000px;
