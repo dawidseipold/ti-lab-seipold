@@ -106,6 +106,46 @@ section {
   color: #4426FF;
 }
 
+/* ---------- Cennik ---------- */
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.price-table th,
+.price-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.price-table th {
+  background: #4426FF;
+  color: #fff;
+}
+
+.price-table .num {
+  text-align: right;
+}
+
+/* ---------- Stopka ---------- */
+
+footer {
+  padding-top: 24px;
+  padding-bottom: 40px;
+  border-top: 1px solid #ddd;
+}
+
+address {
+  font-style: normal;
+}
+
+footer a {
+  color: #4426FF;
+}
+
 img {
   max-width: 100%;
   height: auto;
