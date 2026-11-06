@@ -64,6 +64,48 @@ section {
   padding: 40px 0;
 }
 
+/* ---------- Karty usług ---------- */
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.card {
+  flex: 1 1 260px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card--highlight {
+  border-color: #4426FF;
+  background: #EEF;
+}
+
+.card__badge {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #4426FF;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.card__price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #4426FF;
+}
+
 img {
   max-width: 100%;
   height: auto;
