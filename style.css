@@ -42,10 +42,17 @@ body.menu-open {
 }
 
 .logo {
-  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #4426ff;
+  color: #4426ff; /* SVG bierze ten kolor przez currentColor */
+  text-decoration: none;
+}
+
+.logo svg {
+  display: block;
 }
 
 /* Przycisk menu: widoczny tylko na telefonie */
