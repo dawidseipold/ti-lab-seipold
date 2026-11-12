@@ -1,6 +1,14 @@
 <?php
 $firma = 'Szprycha';
 $rok = date('Y');
+
+$cennik = [
+    ['nazwa' => 'Przegląd podstawowy', 'cena' => 120],
+    ['nazwa' => 'Przegląd sezonowy', 'cena' => 220],
+    ['nazwa' => 'Wymiana dętki', 'cena' => 40],
+    ['nazwa' => 'Centrowanie koła', 'cena' => 60],
+    ['nazwa' => 'Wymiana łańcucha', 'cena' => 50],
+];
 ?>
 <!doctype html>
 <html lang="pl">
@@ -88,26 +96,12 @@ $rok = date('Y');
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Przegląd podstawowy</td>
-              <td class="num">120 zł</td>
-            </tr>
-            <tr>
-              <td>Przegląd sezonowy</td>
-              <td class="num">220 zł</td>
-            </tr>
-            <tr>
-              <td>Wymiana dętki</td>
-              <td class="num">40 zł</td>
-            </tr>
-            <tr>
-              <td>Centrowanie koła</td>
-              <td class="num">60 zł</td>
-            </tr>
-            <tr>
-              <td>Wymiana łańcucha</td>
-              <td class="num">50 zł</td>
-            </tr>
+            <?php foreach ($cennik as $usluga): ?>
+              <tr>
+                <td><?= htmlspecialchars($usluga['nazwa']) ?></td>
+                <td class="num"><?= $usluga['cena'] ?> zł</td>
+              </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </section>
