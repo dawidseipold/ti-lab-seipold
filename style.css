@@ -171,6 +171,38 @@ section {
   text-align: right;
 }
 
+/* ---------- Wykres SVG (bonus) ---------- */
+
+.wykres {
+  margin: 32px 0 0;
+}
+
+.wykres svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wykres rect {
+  fill: #4426ff;
+}
+
+.wykres text {
+  font-size: 14px;
+  fill: #1d1d1f;
+}
+
+.wykres figcaption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.powitanie {
+  font-weight: 600;
+  color: #4426ff;
+}
+
 /* ---------- Stopka ---------- */
 
 footer {

@@ -9,6 +9,17 @@ $cennik = [
     ['nazwa' => 'Centrowanie koła', 'cena' => 60],
     ['nazwa' => 'Wymiana łańcucha', 'cena' => 50],
 ];
+
+// Bonus 1: powitanie z adresu, np. index.php?imie=Ola
+$imie = $_GET['imie'] ?? 'Gościu';
+
+// Bonus 2: wymiary wykresu SVG
+$maxCena = max(array_column($cennik, 'cena'));
+$pasek = 28;       // wysokość jednego paska
+$odstep = 12;      // odstęp między paskami
+$lewo = 180;       // miejsce na nazwy usług
+$dlugosc = 380;    // długość najdłuższego paska
+$wysokoscWykresu = count($cennik) * ($pasek + $odstep);
 ?>
 <!doctype html>
 <html lang="pl">
@@ -67,6 +78,7 @@ $cennik = [
     <main>
       <section class="hero">
         <h1>Pracownia Rowerowa Szprycha</h1>
+        <p class="powitanie">Cześć, <?= htmlspecialchars($imie) ?>!</p>
         <p>
           Naprawiamy, serwisujemy i przygotowujemy rowery do sezonu. Bydgoszcz.
         </p>
@@ -127,6 +139,26 @@ $cennik = [
             <?php endforeach; ?>
           </tbody>
         </table>
+
+        <figure class="wykres">
+          <svg
+            viewBox="0 0 640 <?= $wysokoscWykresu ?>"
+            role="img"
+            aria-labelledby="wykres-tytul"
+          >
+            <title id="wykres-tytul">Wykres cen usług w złotych</title>
+            <?php foreach ($cennik as $i => $usluga): ?>
+              <?php
+              $y = $i * ($pasek + $odstep);
+              $szerokosc = round($usluga['cena'] / $maxCena * $dlugosc);
+              ?>
+              <text x="<?= $lewo - 10 ?>" y="<?= $y + 19 ?>" text-anchor="end"><?= htmlspecialchars($usluga['nazwa']) ?></text>
+              <rect x="<?= $lewo ?>" y="<?= $y ?>" width="<?= $szerokosc ?>" height="<?= $pasek ?>" rx="4" />
+              <text x="<?= $lewo + $szerokosc + 8 ?>" y="<?= $y + 19 ?>"><?= $usluga['cena'] ?> zł</text>
+            <?php endforeach; ?>
+          </svg>
+          <figcaption>Ceny usług – wykres rysowany pętlą PHP z tablicy $cennik</figcaption>
+        </figure>
       </section>
     </main>
 
