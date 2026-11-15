@@ -2,24 +2,18 @@
 $firma = 'Szprycha';
 $rok = date('Y');
 
-$cennik = [
-    ['nazwa' => 'Przegląd podstawowy', 'cena' => 120],
-    ['nazwa' => 'Przegląd sezonowy', 'cena' => 220],
-    ['nazwa' => 'Wymiana dętki', 'cena' => 40],
-    ['nazwa' => 'Centrowanie koła', 'cena' => 60],
-    ['nazwa' => 'Wymiana łańcucha', 'cena' => 50],
-];
+require 'baza.php';
 
-// Bonus 1: powitanie z adresu, np. index.php?imie=Ola
+$uslugi = $pdo->query('SELECT nazwa, cena FROM uslugi ORDER BY cena')->fetchAll();
+
 $imie = $_GET['imie'] ?? 'Gościu';
 
-// Bonus 2: wymiary wykresu SVG
-$maxCena = max(array_column($cennik, 'cena'));
-$pasek = 28;       // wysokość jednego paska
-$odstep = 12;      // odstęp między paskami
-$lewo = 180;       // miejsce na nazwy usług
-$dlugosc = 380;    // długość najdłuższego paska
-$wysokoscWykresu = count($cennik) * ($pasek + $odstep);
+$maxCena = max(array_column($uslugi, 'cena') ?: [1]);
+$pasek = 28;
+$odstep = 12;
+$lewo = 180;
+$dlugosc = 380;
+$wysokoscWykresu = count($uslugi) * ($pasek + $odstep);
 ?>
 <!doctype html>
 <html lang="pl">
@@ -131,7 +125,7 @@ $wysokoscWykresu = count($cennik) * ($pasek + $odstep);
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($cennik as $usluga): ?>
+            <?php foreach ($uslugi as $usluga): ?>
               <tr>
                 <td><?= htmlspecialchars($usluga['nazwa']) ?></td>
                 <td class="num"><?= $usluga['cena'] ?> zł</td>
@@ -147,7 +141,7 @@ $wysokoscWykresu = count($cennik) * ($pasek + $odstep);
             aria-labelledby="wykres-tytul"
           >
             <title id="wykres-tytul">Wykres cen usług w złotych</title>
-            <?php foreach ($cennik as $i => $usluga): ?>
+            <?php foreach ($uslugi as $i => $usluga): ?>
               <?php
               $y = $i * ($pasek + $odstep);
               $szerokosc = round($usluga['cena'] / $maxCena * $dlugosc);
@@ -157,7 +151,7 @@ $wysokoscWykresu = count($cennik) * ($pasek + $odstep);
               <text x="<?= $lewo + $szerokosc + 8 ?>" y="<?= $y + 19 ?>"><?= $usluga['cena'] ?> zł</text>
             <?php endforeach; ?>
           </svg>
-          <figcaption>Ceny usług – wykres rysowany pętlą PHP z tablicy $cennik</figcaption>
+          <figcaption>Ceny usług – wykres rysowany pętlą PHP z bazy danych</figcaption>
         </figure>
       </section>
     </main>
